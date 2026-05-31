@@ -1,0 +1,8 @@
+pandas
+numpy
+yfinance
+scikit-learn
+lightgbm
+joblib
+matplotlib
+pyarrow

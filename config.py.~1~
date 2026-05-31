@@ -1,0 +1,58 @@
+# config.py
+import os
+
+# ---- Universe ----
+US_TICKERS = ['AAPL','MSFT','AMZN','GOOGL','META','TSLA','NVDA','JPM','V','JNJ',
+              'WMT','PG','MA','UNH','HD','DIS','ADBE','NFLX','CRM','AMD']
+DK_TICKERS = ['NOVO-B.CO','DSV.CO','DANSKE.CO','VWS.CO','ORSTED.CO','GMAB.CO',
+              'COLO-B.CO','CHR.CO','NZYM-B.CO','TRYG.CO']
+SE_TICKERS = ['ATCO-A.ST','VOLV-B.ST','ERIC-B.ST','SAND.ST','HM-B.ST','INVE-B.ST',
+              'SEB-A.ST','SWED-A.ST','SHB-A.ST','TEL2-B.ST']
+NO_TICKERS = ['EQNR.OL','DNB.OL','TEL.OL','YAR.OL','NHY.OL','MOWI.OL',
+              'ORK.OL','SALM.OL','BAKKA.OL','SUBC.OL']
+ALL_TICKERS = US_TICKERS + DK_TICKERS + SE_TICKERS + NO_TICKERS
+
+# ---- Currency mapping ----
+CURRENCY_MAP = {ticker: 'USD' for ticker in US_TICKERS}
+for t in DK_TICKERS: CURRENCY_MAP[t] = 'DKK'
+for t in SE_TICKERS: CURRENCY_MAP[t] = 'SEK'
+for t in NO_TICKERS: CURRENCY_MAP[t] = 'NOK'
+
+FX_TICKERS = {'DKK': 'DKKUSD=X', 'SEK': 'SEKUSD=X', 'NOK': 'NOKUSD=X'}
+
+# ---- Data parameters ----
+TRAIN_START_DATE = '2014-01-01'
+TRAIN_END_DATE = '2024-12-31'
+MONITOR_LOOKBACK_YEARS = 2  # years of data needed for feature calculation
+
+# ---- Feature parameters ----
+FEATURE_COLS = ['mom_12_1', 'rev_5', 'vol_20', 'log_dollar_vol', 'ppo_hist']
+
+# ---- Training parameters ----
+INITIAL_TRAIN_MONTHS = 60
+TEST_MONTHS = 6
+PURGE_MONTHS = 1
+LGB_PARAMS = {
+    'objective': 'lambdarank',
+    'metric': 'ndcg',
+    'num_leaves': 31,
+    'max_depth': 5,
+    'learning_rate': 0.05,
+    'n_estimators': 200,
+    'reg_alpha': 0.1,
+    'reg_lambda': 0.1,
+    'random_state': 42,
+    'importance_type': 'gain'
+}
+
+# ---- Portfolio parameters ----
+N_STOCKS = 5
+CORR_THRESH = 0.5
+STOP_N = 2.0
+TRADING_COST = 0.001
+PORTFOLIO_CASH = 100000
+
+# ---- Paths ----
+MODEL_PATH = 'model_ranker.pkl'
+SCALER_PATH = 'feature_scaler.pkl'
+PORTFOLIO_FILE = 'current_portfolio.json'  # optional: store open positions

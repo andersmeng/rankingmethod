@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.data_cache/
+oos_predictions.csv
+backtest_trades.csv
+model.joblib
+scaler.joblib
+current_portfolio.json
+daily_report_*.txt

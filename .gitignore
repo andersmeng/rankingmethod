@@ -8,3 +8,5 @@ model.joblib
 scaler.joblib
 current_portfolio.json
 daily_report_*.txt
+*~
+.*~*

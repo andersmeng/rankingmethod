@@ -7,7 +7,7 @@ A machine learning-driven stock ranking and portfolio system using LightGBM Lamb
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ pip install -r requirement.txt
 | `python main.py daily --mail user@example.com` | Same, emailed |
 | `{cmd} --force` | Force re-download all data (bypass cache) |
 
-Data is cached in `.data_cache/` after first download. Cached data expires after 2 days.
+Data is cached in `.data_cache/` after first download. Each cache (stock prices, volume, FX rates) tracks its own timestamp independently and expires after 2 days. Non-USD prices are converted via FX rates, with forward-fill to handle mismatched trading calendars (e.g. FX markets closed when stocks trade).
 
 ## Pipeline
 
